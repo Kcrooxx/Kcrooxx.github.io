@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chúc bạn được 10 điểm</title>
+  <style>
+    /* Cài đặt nền gradient */
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      background: linear-gradient(45deg, #ff0066, #ffcc00, #66ccff, #66ff66);
+      background-size: 400% 400%;
+      animation: gradientAnimation 6s ease infinite;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Arial', sans-serif;
+      overflow: hidden;
+      position: relative; /* Để chứa confetti */
+    }
+
+    /* Hiệu ứng chuyển động cho nền */
+    @keyframes gradientAnimation {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* Hiệu ứng chữ bất ngờ */
+    .message {
+      font-size: 50px;
+      font-weight: bold;
+      color: white;
+      text-align: center;
+      animation: messageAnimation 2s ease-in-out;
+      opacity: 1; /* Không biến mất */
+    }
+
+    /* Hiệu ứng chữ xuất hiện */
+    @keyframes messageAnimation {
+      0% { opacity: 0; transform: translateY(-50px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Phần tử Confetti */
+    .confetti {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+
+    .confetti div {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background-color: #ffcc00;
+      animation: confettiFall 2s ease-out infinite;
+    }
+
+    /* Hiệu ứng confetti rơi */
+    @keyframes confettiFall {
+      0% { transform: translateY(-100px) rotate(45deg); }
+      100% { transform: translateY(100vh) rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="message">
+    Chúc bạn được 10 điểm
+  </div>
+
+  <div class="confetti" id="confetti"></div>
+
+  <script>
+    // Tạo hiệu ứng confetti
+    function createConfetti() {
+      const confettiContainer = document.getElementById('confetti');
+      const colors = ['#ff0066', '#ffcc00', '#66ccff', '#66ff66'];
+      
+      for (let i = 0; i < 200; i++) {
+        const confettiPiece = document.createElement('div');
+        confettiPiece.style.left = `${Math.random() * 100}%`;
+        confettiPiece.style.animationDuration = `${Math.random() * 2 + 3}s`;
+        confettiPiece.style.animationDelay = `${Math.random() * 2}s`;
+        confettiPiece.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        confettiContainer.appendChild(confettiPiece);
+      }
+    }
+
+    // Tạo confetti khi trang tải
+    window.onload = function() {
+      createConfetti();
+    };
+  </script>
+
+</body>
+</html>
